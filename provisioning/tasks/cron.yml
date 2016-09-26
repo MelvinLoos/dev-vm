@@ -9,5 +9,5 @@
     month: "{{ item.month | default('*') }}"
     job: "{{ item.job }}"
     state: "{{ item.state | default('present') }}"
-  with_items: "{{ drupalvm_cron_jobs|default([]) }}"
+  with_items: "{{ cron_jobs|default([]) }}"
   become: no

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
   <head>
-    <title>Drupal VM</title>
+    <title>Dev VM</title>
     <meta charset="utf-8">
-    <link rel="shortcut icon" href="//cdn.rawgit.com/geerlingguy/drupalvm.github.io/master/favicon.ico" type="image/vnd.microsoft.icon" />
+    <!-- <link rel="shortcut icon" href="//cdn.rawgit.com/geerlingguy/drupalvm.github.io/master/favicon.ico" type="image/vnd.microsoft.icon" /> -->
     <style>
       .section-host {
         font-family: monospace;
@@ -26,13 +26,13 @@
     {%- endif -%}
     {# Returns the hosts server name based on the document root #}
     {%- macro getServernameFromDocroot(path) -%}
-      {%- if drupalvm_webserver == 'apache' -%}
+      {%- if vm_webserver == 'apache' -%}
         {%- for host in apache_vhosts -%}
           {%- if host.documentroot == path -%}
             {{ host.servername }}
           {%- endif -%}
         {%- endfor -%}
-      {%- elif drupalvm_webserver == 'nginx' -%}
+      {%- elif vm_webserver == 'nginx' -%}
         {%- for host in nginx_hosts -%}
           {%- if host.root == path -%}
             {{ host.server_name }}
@@ -61,7 +61,7 @@
 
     {%- macro sectionHost() -%}
       <ul class="section-host">
-        {% if drupalvm_webserver == 'apache' -%}
+        {% if vm_webserver == 'apache' -%}
           {%- for host in apache_vhosts -%}
 
             {{ printHostsEntry(vagrant_ip, host.servername) }}
@@ -72,7 +72,7 @@
             {%- endif %}
 
           {%- endfor -%}
-        {%- elif drupalvm_webserver == 'nginx' -%}
+        {%- elif vm_webserver == 'nginx' -%}
           {%- for host in nginx_hosts -%}
 
             {% for server_name in host.server_name.split(' ') -%}
@@ -100,11 +100,11 @@
             {%- endif %}
         </thead>
         <tbody>
-          {% if drupalvm_webserver == 'apache' -%}
+          {% if vm_webserver == 'apache' -%}
             {%- for host in apache_vhosts -%}
               {{ printSite(host.servername, host.documentroot) }}
             {%- endfor -%}
-          {%- elif drupalvm_webserver == 'nginx' -%}
+          {%- elif vm_webserver == 'nginx' -%}
             {%- for host in nginx_hosts -%}
               {%- for hostname in host.server_name.split() -%}
                 {{ printSite(hostname, host.root) }}
@@ -197,7 +197,7 @@
         </tr>
         <tr>
           <th>Webserver</th>
-          <td><code>{{ drupalvm_webserver|capitalize }}</code></td>
+          <td><code>{{ vm_webserver|capitalize }}</code></td>
         </tr>
         <tr>
           <th>Memory limit</th>
@@ -295,8 +295,8 @@
           <section class="jumbotron">
             <div class="row">
               <div class="col-md-7 text-center">
-                <a href="https://www.drupalvm.com/"><img src="http://docs.drupalvm.com/en/latest/images/drupal-vm-logo.png" alt="Drupal VM" title="Welcome to Drupal VM"></a>
-                <p><a href="https://github.com/geerlingguy/drupal-vm">Drupal VM</a> is a VM for local Drupal development, built with Vagrant + Ansible.</p>
+                <h1>Welcome to Dev VM</h1>
+                <p><a href="https://github.com/geerlingguy/drupal-vm">Dev VM</a> is a VM for local PHP development, built with Vagrant + Ansible.</p>
                 <p><a class="btn btn-primary btn-lg" href="http://docs.drupalvm.com/en/latest/" role="button">Read the documentation</a></p>
               </div>
 
