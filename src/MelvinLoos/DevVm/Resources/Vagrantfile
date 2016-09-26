@@ -5,7 +5,7 @@ ENV['VM_PROJECT_ROOT'] = "#{__dir__}"
 # placed your config.yml file.
 ENV['VM_CONFIG_DIR'] = "config"
 # The relative path from the project root to the directory where Drupal VM is located.
-ENV['VM_DIR'] = "vendor/infopact/dev-vm"
+ENV['VM_DIR'] = "vendor/melvinloos/dev-vm"
 
 # Load the real Vagrantfile
 load "#{__dir__}/#{ENV['VM_DIR']}/Vagrantfile"
