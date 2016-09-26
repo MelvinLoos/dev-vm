@@ -1,11 +1,15 @@
 {
-    "name": "geerlingguy/drupal-vm",
-    "type": "project",
-    "description": "A VM for local Drupal development, built with Vagrant + Ansible",
-    "keywords": ["vagrant", "vm", "virtual machine", "drupal"],
-    "homepage": "https://www.drupalvm.com",
+    "name": "melvinloos/dev-vm",
+    "type": "composer-plugin",
+    "description": "A VM for local PHP development, built with Vagrant + Ansible, based on Drupal-VM",
+    "keywords": ["vagrant", "vm", "virtual machine", "php"],
+    "homepage": "",
     "license": "MIT",
     "authors": [
+        {
+            "name": "Melvin Loos",
+            "homepage": "http://MelvinLoos.nl"
+        },
         {
             "name": "Jeff Geerling",
             "homepage": "http://www.jeffgeerling.com"
@@ -16,9 +20,20 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/geerlingguy/drupal-vm/issues",
-        "source": "https://github.com/geerlingguy/drupal-vm",
-        "docs": "http://docs.drupalvm.com"
+        "issues": "https://github.com/MelvinLoos/dev-vm/issues",
+        "source": "https://github.com/MelvinLoos/dev-vm",
+        "docs": ""
     },
-    "require": {}
+    "require": {
+        "symfony/filesystem": "^2.6|^3.0",
+        "composer-plugin-api": "^1.0"
+    },
+    "extra": {
+        "class": "MelvinLoos\\DevVm\\DevVm"
+    },
+    "autoload": {
+      "psr-0": {
+        "MelvinLoos": "src"
+      }
+    }
 }

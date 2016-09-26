@@ -4,14 +4,14 @@ VAGRANTFILE_API_VERSION = '2' unless defined? VAGRANTFILE_API_VERSION
 Vagrant.require_version '>= 1.8.1'
 
 # Absolute paths on the host machine.
-host_drupalvm_dir = File.dirname(File.expand_path(__FILE__))
-host_project_dir = ENV['DRUPALVM_PROJECT_ROOT'] || host_drupalvm_dir
-host_config_dir = ENV['DRUPALVM_CONFIG_DIR'] ? "#{host_project_dir}/#{ENV['DRUPALVM_CONFIG_DIR']}" : host_project_dir
+host_vm_dir = File.dirname(File.expand_path(__FILE__))
+host_project_dir = ENV['VM_PROJECT_ROOT'] || host_vm_dir
+host_config_dir = ENV['VM_CONFIG_DIR'] ? "#{host_project_dir}/#{ENV['VM_CONFIG_DIR']}" : host_project_dir
 
 # Absolute paths on the guest machine.
 guest_project_dir = '/vagrant'
-guest_drupalvm_dir = ENV['DRUPALVM_DIR'] ? "/vagrant/#{ENV['DRUPALVM_DIR']}" : guest_project_dir
-guest_config_dir = ENV['DRUPALVM_CONFIG_DIR'] ? "/vagrant/#{ENV['DRUPALVM_CONFIG_DIR']}" : guest_project_dir
+guest_vm_dir = ENV['VM_DIR'] ? "/vagrant/#{ENV['VM_DIR']}" : guest_project_dir
+guest_config_dir = ENV['VM_CONFIG_DIR'] ? "/vagrant/#{ENV['VM_CONFIG_DIR']}" : guest_project_dir
 
 # Cross-platform way of finding an executable in the $PATH.
 def which(cmd)
@@ -37,7 +37,7 @@ end
 
 require 'yaml'
 # Load default VM configurations.
-vconfig = YAML.load_file("#{host_drupalvm_dir}/default.config.yml")
+vconfig = YAML.load_file("#{host_vm_dir}/default.config.yml")
 # Use optional config.yml and local.config.yml for configuration overrides.
 ['config.yml', 'local.config.yml'].each do |config_file|
   if File.exist?("#{host_config_dir}/#{config_file}")
@@ -77,7 +77,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # If a hostsfile manager plugin is installed, add all server names as aliases.
   aliases = []
-  if vconfig['drupalvm_webserver'] == 'apache'
+  if vconfig['webserver'] == 'apache'
     vconfig['apache_vhosts'].each do |host|
       aliases.push(host['servername'])
       aliases.concat(host['serveralias'].split) if host['serveralias']
@@ -118,17 +118,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Allow override of the default synced folder type.
   config.vm.synced_folder host_project_dir, '/vagrant', type: vconfig.include?('vagrant_synced_folder_default_type') ? vconfig['vagrant_synced_folder_default_type'] : 'nfs'
 
-  # Provisioning. Use ansible if it's installed, ansible_local if not or if forced.
-  if which('ansible-playbook') && !vconfig['force_ansible_local']
+  # Provisioning. Use ansible if it's installed, ansible_local if not.
+  if which('ansible-playbook')
     config.vm.provision 'ansible' do |ansible|
-      ansible.playbook = "#{host_drupalvm_dir}/provisioning/playbook.yml"
+      ansible.playbook = "#{host_vm_dir}/provisioning/playbook.yml"
       ansible.extra_vars = {
         config_dir: host_config_dir
       }
     end
   else
     config.vm.provision 'ansible_local' do |ansible|
-      ansible.playbook = "#{guest_drupalvm_dir}/provisioning/playbook.yml"
+      ansible.playbook = "#{guest_vm_dir}/provisioning/playbook.yml"
       ansible.extra_vars = {
         config_dir: guest_config_dir
       }
