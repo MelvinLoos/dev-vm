@@ -39,7 +39,7 @@ Class DevVm implements PluginInterface, EventSubscriberInterface
       // copy development machine files to root of project if it does not exist
       $files = array(
           array(
-            'origin' => __DIR__.'/Resources/default.config.yml',
+            'origin' => __DIR__.'/Resources/config.dist.yml',
             'target' => $vendorDir.'/../dev-environment.yml'
           ),
           array(

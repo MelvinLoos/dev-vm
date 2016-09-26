@@ -3,7 +3,7 @@
 ENV['VM_PROJECT_ROOT'] = "#{__dir__}"
 # The relative path from the project root to the config directory where you
 # placed your config.yml file.
-ENV['VM_CONFIG_DIR'] = "config"
+ENV['VM_CONFIG_DIR'] = ""
 # The relative path from the project root to the directory where Drupal VM is located.
 ENV['VM_DIR'] = "vendor/melvinloos/dev-vm"
 

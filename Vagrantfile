@@ -39,7 +39,7 @@ require 'yaml'
 # Load default VM configurations.
 vconfig = YAML.load_file("#{host_vm_dir}/default.config.yml")
 # Use optional config.yml and local.config.yml for configuration overrides.
-['config.yml', 'local.config.yml'].each do |config_file|
+['dev-environment.yml', 'local.config.yml'].each do |config_file|
   if File.exist?("#{host_config_dir}/#{config_file}")
     vconfig.merge!(YAML.load_file("#{host_config_dir}/#{config_file}"))
   end
