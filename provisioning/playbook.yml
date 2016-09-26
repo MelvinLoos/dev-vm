@@ -34,7 +34,7 @@
     - name: Set the PHP webserver daemon correctly when nginx is in use.
       set_fact:
         php_webserver_daemon: nginx
-      when: vm_webserver == 'nginx'
+      when: webserver == 'nginx'
 
   roles:
     # Essential roles.
@@ -42,9 +42,9 @@
     - geerlingguy.firewall
     - geerlingguy.git
     - geerlingguy.postfix
-    - { role: geerlingguy.apache, when: vm_webserver == 'apache' }
-    - { role: geerlingguy.apache-php-fpm, when: vm_webserver == 'apache' }
-    - { role: geerlingguy.nginx, when: vm_webserver == 'nginx' }
+    - { role: geerlingguy.apache, when: webserver == 'apache' }
+    - { role: geerlingguy.apache-php-fpm, when: webserver == 'apache' }
+    - { role: geerlingguy.nginx, when: webserver == 'nginx' }
     - geerlingguy.mysql
     - geerlingguy.php
     - geerlingguy.php-pecl

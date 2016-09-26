@@ -21,7 +21,7 @@
     state: directory
     mode: 0755
     recurse: true
-  when: vm_webserver == 'apache'
+  when: webserver == 'apache'
 
 - name: Copy Nginx vhosts into place.
   template:
@@ -33,4 +33,4 @@
     mode: 0644
   with_items: "{{ nginx_hosts }}"
   notify: restart nginx
-  when: vm_webserver == 'nginx'
+  when: webserver == 'nginx'

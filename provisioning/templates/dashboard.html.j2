@@ -26,13 +26,13 @@
     {%- endif -%}
     {# Returns the hosts server name based on the document root #}
     {%- macro getServernameFromDocroot(path) -%}
-      {%- if vm_webserver == 'apache' -%}
+      {%- if webserver == 'apache' -%}
         {%- for host in apache_vhosts -%}
           {%- if host.documentroot == path -%}
             {{ host.servername }}
           {%- endif -%}
         {%- endfor -%}
-      {%- elif vm_webserver == 'nginx' -%}
+      {%- elif webserver == 'nginx' -%}
         {%- for host in nginx_hosts -%}
           {%- if host.root == path -%}
             {{ host.server_name }}
@@ -61,7 +61,7 @@
 
     {%- macro sectionHost() -%}
       <ul class="section-host">
-        {% if vm_webserver == 'apache' -%}
+        {% if webserver == 'apache' -%}
           {%- for host in apache_vhosts -%}
 
             {{ printHostsEntry(vagrant_ip, host.servername) }}
@@ -72,7 +72,7 @@
             {%- endif %}
 
           {%- endfor -%}
-        {%- elif vm_webserver == 'nginx' -%}
+        {%- elif webserver == 'nginx' -%}
           {%- for host in nginx_hosts -%}
 
             {% for server_name in host.server_name.split(' ') -%}
@@ -100,11 +100,11 @@
             {%- endif %}
         </thead>
         <tbody>
-          {% if vm_webserver == 'apache' -%}
+          {% if webserver == 'apache' -%}
             {%- for host in apache_vhosts -%}
               {{ printSite(host.servername, host.documentroot) }}
             {%- endfor -%}
-          {%- elif vm_webserver == 'nginx' -%}
+          {%- elif webserver == 'nginx' -%}
             {%- for host in nginx_hosts -%}
               {%- for hostname in host.server_name.split() -%}
                 {{ printSite(hostname, host.root) }}
@@ -197,7 +197,7 @@
         </tr>
         <tr>
           <th>Webserver</th>
-          <td><code>{{ vm_webserver|capitalize }}</code></td>
+          <td><code>{{ webserver|capitalize }}</code></td>
         </tr>
         <tr>
           <th>Memory limit</th>
