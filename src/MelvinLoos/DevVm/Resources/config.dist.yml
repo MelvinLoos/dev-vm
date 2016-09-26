@@ -11,6 +11,8 @@ vagrant_hostname: hostname.dev
 vagrant_machine_name: hostname
 vagrant_ip: 0.0.0.0
 
+app_core_path: "/var/www/app"
+
 # Allow Dev Environment to be accessed via a public network interface on your host.
 # Vagrant boxes are insecure by default, so be careful. You've been warned!
 # See: https://docs.vagrantup.com/v2/networking/public_network.html
@@ -21,7 +23,7 @@ vagrant_public_ip: ""
 # http://docs.drupalvm.com/en/latest/extras/syncing-folders/ for more info.
 vagrant_synced_folders:
   - local_path: .
-    destination: "/var/www/app"
+    destination: "{{ app_core_path }}"
     type: nfs
     create: true
 
