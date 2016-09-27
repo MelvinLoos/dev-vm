@@ -41,6 +41,15 @@
       {%- endif -%}
     {%- endmacro -%}
 
+    {%- macro printSite(servername, docroot) -%}
+      {%- if docroot not in _devtool_docroots -%}
+       <tr>
+         <td><a href="http://{{ servername }}">{{ servername }}</a></td>
+         <td><code>{{ docroot }}</code></td>
+       </tr>
+      {% endif %}
+    {%- endmacro %}
+
     {%- macro printHostsEntry(ip, servername) -%}
       {%- if servername != ip -%}
         <li>{{ ip }} {{ servername }}</li>
