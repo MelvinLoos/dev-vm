@@ -38,7 +38,7 @@ webserver: apache
 # multisite deployments, you can point multiple servernames at one documentroot.
 # View the geerlingguy.apache Ansible Role README for more options.
 apache_vhosts:
-  - servername: "{{ app_domain }}"
+  - servername: "{{ vagrant_hostname }}"
     documentroot: "{{ app_core_path }}"
     extra_parameters: |
           ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ app_core_path }}"
@@ -77,7 +77,7 @@ apache_mods_enabled:
 # here. Set the 'is_php' property for document roots that contain PHP apps like
 # Drupal.
 nginx_hosts:
-  - server_name: "{{ app_domain }} www.{{ app_domain }}"
+  - server_name: "{{ vagrant_hostname }} www.{{ vagrant_hostname }}"
     root: "{{ app_core_path }}"
     is_php: true
 
