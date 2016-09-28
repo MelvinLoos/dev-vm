@@ -101,16 +101,10 @@ nginx_ppa_use: true
 
 # MySQL Databases and users. If 'install_site' is 'true', first database will
 # be used for the site.
-mysql_databases:
-  - name: "app"
-    encoding: utf8
-    collation: utf8_general_ci
+mysql_databases: []
 
-mysql_users:
-  - name: "development"
-    host: "%"
-    password: "development"
-    priv: "app.*:ALL"
+mysql_users: []
+
 
 # Comment out any extra utilities you don't want to install. If you don't want
 # to install *any* extras, make set this value to an empty set, e.g. `[]`.
@@ -130,8 +124,7 @@ installed_extras:
   # - xhprof
 
 # Add any extra apt or yum packages you would like installed.
-extra_packages:
-  - sqlite
+extra_packages: []
 
 # You can configure almost anything else on the server in the rest of this file.
 extra_security_enabled: false
