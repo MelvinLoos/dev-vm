@@ -82,6 +82,8 @@
     - include: tasks/www.yml
     - include: tasks/apparmor.yml
       when: ansible_os_family == 'Debian'
+    - include: tasks/php-mongo.yml
+      when: '"mongodb" in database_servers'
 
     - include: tasks/dashboard.yml
       when: dashboard_install_dir is defined and dashboard_install_dir != ''

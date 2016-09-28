@@ -1,0 +1,8 @@
+---
+- name: install php-mongodb php module for php7
+  apt: name=php-mongodb state=present
+  when: php_version == "7.0"
+
+- name: install php-mongo php module for php5
+  apt: name=php5-mongo state=present
+  when: php_version == "5.6"
