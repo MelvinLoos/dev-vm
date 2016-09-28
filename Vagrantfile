@@ -122,6 +122,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   if which('ansible-playbook')
     config.vm.provision 'ansible' do |ansible|
       ansible.playbook = "#{host_vm_dir}/provisioning/playbook.yml"
+      ansible.galaxy_role_file = "#{host_vm_dir}/provisioning/requirements.yml"
       ansible.extra_vars = {
         config_dir: host_config_dir
       }
@@ -129,6 +130,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   else
     config.vm.provision 'ansible_local' do |ansible|
       ansible.playbook = "#{guest_vm_dir}/provisioning/playbook.yml"
+      ansible.galaxy_role_file = "#{guest_vm_dir}/provisioning/requirements.yml"
       ansible.extra_vars = {
         config_dir: guest_config_dir
       }
