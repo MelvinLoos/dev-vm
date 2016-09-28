@@ -15,4 +15,4 @@
 vagrant_ansible_inventory_default
 
 # Some roles include 'config.yml' files.
-!provisioning/roles/**/config.yml
+provisioning/roles

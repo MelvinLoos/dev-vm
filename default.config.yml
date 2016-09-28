@@ -99,6 +99,8 @@ nginx_hosts:
 nginx_remove_default_vhost: true
 nginx_ppa_use: true
 
+database_servers: []
+
 # MySQL Databases and users. If 'install_site' is 'true', first database will
 # be used for the site.
 mysql_databases: []
@@ -109,7 +111,8 @@ mysql_users: []
 # Comment out any extra utilities you don't want to install. If you don't want
 # to install *any* extras, make set this value to an empty set, e.g. `[]`.
 installed_extras:
-  - adminer
+  # - adminer
+  # - mongo-express
   # - blackfire
   - mailhog
   # - memcached
@@ -176,7 +179,7 @@ post_provision_scripts: []
 
 # MySQL Configuration.
 mysql_root_password: root
-mysql_slow_query_log_enabled: true
+mysql_slow_query_log_enabled: false
 mysql_slow_query_time: 2
 mysql_wait_timeout: 300
 adminer_install_filename: index.php

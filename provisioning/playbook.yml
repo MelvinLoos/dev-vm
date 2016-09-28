@@ -45,10 +45,11 @@
     - { role: geerlingguy.apache, when: webserver == 'apache' }
     - { role: geerlingguy.apache-php-fpm, when: webserver == 'apache' }
     - { role: geerlingguy.nginx, when: webserver == 'nginx' }
-    - geerlingguy.mysql
+    - { role: geerlingguy.mysql, when: '"mysql" in database_servers' }
+    - { role: Stouts.mongodb, when: '"mongodb" in database_servers' }
     - geerlingguy.php
     - geerlingguy.php-pecl
-    - geerlingguy.php-mysql
+    - { role: geerlingguy.php-mysql, when: '"mysql" in database_servers' }
     - geerlingguy.composer
 
     # Conditionally-installed roles.
@@ -70,6 +71,7 @@
     - { role: arknoll.selenium, when: '"selenium" in installed_extras' }
     - { role: geerlingguy.solr, when: '"solr" in installed_extras' }
     - { role: geerlingguy.elasticsearch, when: '"elasticsearch" in installed_extras' }
+    - { role: manala.mongo-express, when: '"mongo-express" in installed_extras' }
 
     # Roles for security and stability on production.
     - { role: geerlingguy.security, when: extra_security_enabled }

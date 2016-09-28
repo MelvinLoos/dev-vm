@@ -61,3 +61,6 @@
   version: 1.4.0
 - src: geerlingguy.solr
   version: 3.2.0
+- src: Stouts.mongodb
+  version: 2.2.7
+- src: manala.mongo-express
